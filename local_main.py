@@ -119,8 +119,11 @@ class MedicalTranscriber:
             f.write("Summary:\n")
             f.write(summary)
             f.write("\n\nFull Transcription:\n")
-            f.write(transcribed_text)
-                
+            # Write the full transcription to the .txt file in blocks of 100 characters
+            for i in range(0, len(transcribed_text), 100):
+                f.write(transcribed_text[i:i+100])
+                f.write("\n")
+                        
         # Delete the .wav file
         os.remove(audio_file_path)
             # Update the GUI
