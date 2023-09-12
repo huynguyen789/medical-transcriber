@@ -3,6 +3,7 @@ import wave
 import time
 import threading
 import tkinter as tk
+from tkinter import Label
 import pyaudio
 import whisper
 from datetime import datetime
@@ -27,6 +28,10 @@ class MedicalTranscriber:
         self.label = tk.Label(text="00:00:00")
         self.label.pack()
         
+        # Create a label to display the status
+        self.status_label = tk.Label(text="Status: Idle")
+        self.status_label.pack()
+        
         self.recording = False
         self.audio_file_path = ""
         
@@ -42,16 +47,17 @@ class MedicalTranscriber:
     def click_handler(self):
         if self.recording:
             self.recording = False
-            self.button.config(bg="black")
+            self.button.config(text="🎤", font=("Arial", 120, "bold"))
         else:
             self.recording = True
-            self.button.config(bg="red")
+            self.button.config(text="🛑", font=("Arial", 120, "bold"))
             threading.Thread(target=self.record).start()
     
     def record(self):
         audio = pyaudio.PyAudio()
         stream = audio.open(format=pyaudio.paInt16, channels=1, rate=44100, input=True, frames_per_buffer=1024)
         frames = []
+        self.status_label.config(text="Recording...")
         start_time= datetime.now()
         start = time.time()
         
@@ -90,12 +96,17 @@ class MedicalTranscriber:
         return(completion.completion)
     
     def transcribe(self, audio_file_path):
+        self.status_label.config(text="Transcribing...")
         result = self.model.transcribe(audio_file_path, fp16=False)
         transcribed_text = result['text']
         
         #Generate summary:
-        summary = self.claude_summary(transcribed_text)
-        
+        if len(transcribed_text) > 500:
+            self.status_label.config(text="Summarizing...")
+            summary = self.claude_summary(transcribed_text)
+        else:
+            summary = "Transcribed text was too short to summarize."
+            
         # Specify the folder for .txt files
         folder_path = os.path.join(os.getcwd(), 'transcribedText')
         # Check if the folder exists, if not, create it
@@ -112,8 +123,10 @@ class MedicalTranscriber:
                 
         # Delete the .wav file
         os.remove(audio_file_path)
-    
-        return transcribed_text
+            # Update the GUI
+        self.status_label.config(text="Finished.")
+            
+                
         
         
 MedicalTranscriber()
