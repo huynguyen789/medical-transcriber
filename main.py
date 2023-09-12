@@ -7,10 +7,10 @@ import os
 from anthropic import Anthropic, HUMAN_PROMPT, AI_PROMPT
 
 # TODO:
-# 1. Recoding audio --> wav or mp4 file
+# 1. Recoding audio: Done
 # 2. Transcribe audio file: Done
-# 3. Generate summary of transcribed text
-
+# 3. Generate summary of transcribed text: Done
+# 4. Implement cache
 
 anthropic = Anthropic()
 anthropic.api_key = st.secrets["CLAUDE_API_KEY"]
