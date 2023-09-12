@@ -42,5 +42,3 @@ The following environment variables need to be set:
 - st_audiorec: Streamlit component for recording audio
 - whisper: Speech recognition model from OpenAI
 - anthropic: Python client for Claude API
-
-Let me know if any part of the README needs clarification!
