@@ -39,4 +39,4 @@ This is a GUI application for medical transcription using speech recognition. It
 - Export/email .txt file
 - Add speaker diarization
 
-Let me know if any part of the README needs clarification!
+
