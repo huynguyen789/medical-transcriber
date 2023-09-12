@@ -1,6 +1,6 @@
-anthropic
-streamlit
-st_audiorec
-tempfile
-git+https://github.com/openai/whisper.git 
+anthropic==0.3.11
+openai_whisper==20230314
+streamlit==1.26.0
+streamlit_audiorec==0.1.3
 ffmpeg
+git+https://github.com/openai/whisper.git 
