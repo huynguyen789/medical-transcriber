@@ -1,0 +1,6 @@
+anthropic
+streamlit
+st_audiorec
+tempfile
+git+https://github.com/openai/whisper.git 
+ffmpeg
