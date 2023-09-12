@@ -4,6 +4,7 @@ import whisper
 import tempfile
 import time
 import os
+import ffmpeg
 from anthropic import Anthropic, HUMAN_PROMPT, AI_PROMPT
 
 # TODO:
