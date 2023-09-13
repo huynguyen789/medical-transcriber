@@ -1,6 +1,0 @@
-anthropic==0.3.11
-ffmpeg==1.4
-git+https://github.com/openai/whisper.git 
-PyAudio==0.2.13
-# streamlit==1.26.0
-# streamlit_audiorec==0.1.3
