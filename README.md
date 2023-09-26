@@ -1,44 +1,42 @@
-# Doctor's Assistant
+# Medical Transcription App
 
-This is a Streamlit app that allows users to record audio, transcribe it, and generate a summary. It uses the following main libraries:
-
-- streamlit
-- st_audiorec
-- whisper
-- anthropic
+This is a GUI application for medical transcription using speech recognition. It allows users to record audio, transcribe it, and generate a summary.
 
 ## Functionality
 
-The app has the following functionality:
-
-- Record audio using st_audiorec
-- Save the audio to a wav file
-- Transcribe the audio using Whisper's speech recognition 
-- Summarize the transcribed text using Anthropic's Claude AI
-- Display the transcribed text and summary
-- Cache the results to avoid re-transcribing and summarizing every time
-
-## Usage
-
-To use the app:
-
-1. Run `streamlit run app.py`
-2. Click the 'Record Audio' button to record audio through the microphone
-3. Once completed, click 'Generate Transcription' to transcribe the audio using Whisper 
-4. Click 'Generate Summary' to summarize the transcribed text using Claude
-5. The transcribed text and summary will be displayed
-
-## Configuration
-
-The following environment variables need to be set:
-
-- `CLAUDE_API_KEY`: Get your API key from Anthropic and set as a Streamlit secret
-- `AUDIO_CACHE`: Path to cache audio files
-- `TEXT_CACHE`: Path to cache text files
+- Record audio by clicking the microphone button 
+- Timer shows length of recording
+- Transcribe audio using Whisper speech recognition
+- Summarize transcribed text using Claude AI
+- Save transcription and summary to .txt file
+- Delete audio file after transcription
+- Update GUI with status messages 
 
 ## Libraries
 
-- streamlit: Framework for building web apps in Python
-- st_audiorec: Streamlit component for recording audio
-- whisper: Speech recognition model from OpenAI
-- anthropic: Python client for Claude API
+- tkinter - For creating the GUI
+- pyaudio - Record audio from microphone
+- whisper - OpenAI speech recognition
+- anthropic - Claude AI summarization 
+- wave - Save audio as .wav file
+- os - File management
+- threading - Run recording asynchronously 
+
+## Usage
+
+1. `pip install requirements.txt`
+2. Add Claude API key to config.py
+3. Run `python medical_transcriber.py`
+4. Click mic button to start recording
+5. Audio will be transcribed and summarized after stopping
+6. .txt file with transcription saved in /transcribedText folder
+
+## Improvements
+
+- Add ability to upload audio files
+- Split transcription into sections
+- Highlight summary keywords in full text
+- Export/email .txt file
+- Add speaker diarization
+
+
