@@ -91,16 +91,19 @@ class MedicalTranscriber:
         
         
     def claude_summary(self, text):
+        
+        instruction = """Below is a pulmonologist visit note. Summarize it in bullet points in two versions. 
+            The first use medical terminology for pulmonary medicine for doctor notes. 
+            The second one uses simple terms for patient summary. 
+            Only summarize, do not add or remove information:\n"""
+        
         completion = self.anthropic.completions.create(
             model="claude-2.0", #claude-2.0 #claude-instant-1.2
             max_tokens_to_sample=1000,
             temperature=0.1,
-            prompt=f"""
-            {HUMAN_PROMPT}Below is a pulmonologist visit note. Summarize it in bullet points in two versions. 
-            The first use medical terminology for pulmonary medicine for doctor notes. 
-            The second one uses simple terms for patient summary. 
-            Only summarize, do not add or remove information:\n
-            {text} {AI_PROMPT}:""",
+            prompt=f"""{HUMAN_PROMPT}{instruction}
+            {text}
+            {AI_PROMPT}:""",
         )
         return(completion.completion)
     
@@ -134,14 +137,12 @@ class MedicalTranscriber:
                 f.write(transcribed_text[i:i+100])
                 f.write("\n")
                         
-        # # Delete the .wav file
-        # os.remove(audio_file_path)
         
-        # Find all .wav files in the current directory
-        wav_files = glob.glob('*.wav')
-        # Delete all .wav files
-        for wav_file in wav_files:
-            os.remove(wav_file)
+        # # Find all .wav files in the current directory
+        # wav_files = glob.glob('*.wav')
+        # # Delete all .wav files
+        # for wav_file in wav_files:
+        #     os.remove(wav_file)
         
         # Update the GUI
         self.status_label.config(text="Finished.")

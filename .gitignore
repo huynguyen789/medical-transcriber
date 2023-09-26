@@ -1,3 +1,6 @@
 *.wav
 *.txt
 config.py
+*.bin
+*.env
+*.pyc
